@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RatesBotApp {
+public class ExchangeRatesBotApp {
     public static void main(String[] args) {
-        SpringApplication.run(RatesBotApp.class, args);
+        SpringApplication.run(ExchangeRatesBotApp.class);
     }
 }
