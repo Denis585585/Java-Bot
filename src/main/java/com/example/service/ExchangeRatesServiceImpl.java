@@ -2,8 +2,8 @@ package com.example.service;
 
 import com.example.client.CbrClient;
 import com.example.exception.ServiceException;
-import org.jvnet.hk2.annotations.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 
-@Service
+@Component
 public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     private static final String USD_XPATH = "/ValCurs//Valute[@ID='R01235']/Value";
@@ -31,11 +31,10 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     }
 
     @Override
-    public String getEURExchangeRate() throws ServiceException{
+    public String getEURExchangeRate() throws ServiceException {
         var xmlOptional = client.getCurrencyRatesXML();
         String xml = xmlOptional.orElseThrow(
-                () -> new ServiceException("Error")
-        );
+                () -> new ServiceException("Error"));
         return extractCurrencyValueFromXML(xml, EUR_XPATH);
     }
 
