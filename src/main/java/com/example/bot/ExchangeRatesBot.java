@@ -47,6 +47,7 @@ public class ExchangeRatesBot extends TelegramLongPollingBot {
             case USD -> usdCommand(chatId);
             case EUR -> eurCommand(chatId);
             case HELP -> helpCommand(chatId);
+            default -> unknownCommand(chatId);
         }
     }
 
