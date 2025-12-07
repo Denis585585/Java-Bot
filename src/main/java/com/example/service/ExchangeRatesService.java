@@ -8,4 +8,5 @@ public interface ExchangeRatesService {
 
     String getEURExchangeRate() throws ServiceException;
 
+    String getCNYExchangeRate() throws ServiceException;
 }

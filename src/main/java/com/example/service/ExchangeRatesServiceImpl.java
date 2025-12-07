@@ -17,6 +17,8 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     private static final String USD_XPATH = "/ValCurs//Valute[@ID='R01235']/Value";
     private static final String EUR_XPATH = "/ValCurs//Valute[@ID='R01239']/Value";
+    private static final String CNY_XPATH = "/ValCurs//Valute[@ID='R01375']/Value";
+
 
     @Autowired
     private CbrClient client;
@@ -37,6 +39,15 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
                 () -> new ServiceException("Error"));
         return extractCurrencyValueFromXML(xml, EUR_XPATH);
     }
+
+    @Override
+    public String getCNYExchangeRate() throws ServiceException {
+        var xmlOptional = client.getCurrencyRatesXML();
+        String xml = xmlOptional.orElseThrow(
+                () -> new ServiceException("Error"));
+        return extractCurrencyValueFromXML(xml, CNY_XPATH);
+    }
+
 
     private static String extractCurrencyValueFromXML(String xml, String xpathExpression) throws ServiceException {
         var source = new InputSource(new StringReader(xml));
